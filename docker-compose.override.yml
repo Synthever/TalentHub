@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  app:
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    ports:
+      - "9000:9000"
+
+  nginx:
+    ports:
+      - "8080:80"
+
+  mysql:
+    ports:
+      - "3307:3306"
