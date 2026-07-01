@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Mahasiswa\ProfileController;
+use App\Http\Controllers\Mahasiswa\SkillController;
 use Illuminate\Support\Facades\Route;
 
 // Landing redirect
@@ -43,5 +44,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/profil', [ProfileController::class, 'show'])->name('profile.show');
         Route::get('/profil/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/profil', [ProfileController::class, 'update'])->name('profile.update');
+
+        // Skills
+        Route::get('/skills', [SkillController::class, 'index'])->name('skills.index');
+        Route::get('/skills/tambah', [SkillController::class, 'create'])->name('skills.create');
+        Route::post('/skills', [SkillController::class, 'store'])->name('skills.store');
+        Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
     });
 });
