@@ -50,6 +50,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/certificates/{certificate}', [AdminCertificateController::class, 'show'])->name('certificates.show');
         Route::post('/certificates/{certificate}/approve', [AdminCertificateController::class, 'approve'])->name('certificates.approve');
         Route::post('/certificates/{certificate}/reject', [AdminCertificateController::class, 'reject'])->name('certificates.reject');
+
+        // Rewards Management
+        Route::resource('rewards', App\Http\Controllers\Admin\RewardController::class);
     });
 
     // Mahasiswa routes
@@ -86,5 +89,11 @@ Route::middleware('auth')->group(function () {
         // Rewards
         Route::get('/rewards', [RewardController::class, 'index'])->name('rewards.index');
         Route::post('/rewards/{reward}/claim', [RewardController::class, 'claim'])->name('rewards.claim');
+
+        // AI Recommendations
+        Route::get('/ai', [App\Http\Controllers\Mahasiswa\AIRecommendationController::class, 'index'])->name('ai.index');
+        Route::get('/ai/skill-matching', [App\Http\Controllers\Mahasiswa\AIRecommendationController::class, 'skillMatching'])->name('ai.skill-matching');
+        Route::get('/ai/development-path', [App\Http\Controllers\Mahasiswa\AIRecommendationController::class, 'developmentPath'])->name('ai.development-path');
+        Route::get('/ai/collaboration', [App\Http\Controllers\Mahasiswa\AIRecommendationController::class, 'collaboration'])->name('ai.collaboration');
     });
 });
