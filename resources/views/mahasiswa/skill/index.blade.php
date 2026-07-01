@@ -38,7 +38,8 @@
     {{-- Skill List --}}
     <div class="mt-6">
         @if ($userSkills->isNotEmpty())
-            <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+            {{-- Desktop Table (hidden on mobile) --}}
+            <div class="hidden md:block overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
                 <table class="min-w-full divide-y divide-slate-200">
                     <thead class="bg-slate-50">
                         <tr>
@@ -104,6 +105,63 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+
+            {{-- Mobile Cards (hidden on desktop) --}}
+            <div class="space-y-3 md:hidden">
+                @foreach ($userSkills as $userSkill)
+                    <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold text-slate-900">{{ $userSkill->skill->name }}</p>
+                                <p class="text-xs text-slate-400">{{ ucfirst($userSkill->skill->kategori ?? '-') }}</p>
+                            </div>
+                            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
+                                @if ($userSkill->status === 'approved') bg-emerald-50 text-emerald-700
+                                @elseif ($userSkill->status === 'pending') bg-amber-50 text-amber-700
+                                @else bg-rose-50 text-rose-600 @endif">
+                                @if ($userSkill->status === 'approved') Disetujui
+                                @elseif ($userSkill->status === 'pending') Menunggu
+                                @else Ditolak @endif
+                            </span>
+                        </div>
+
+                        <div class="mt-3 grid grid-cols-2 gap-3">
+                            <div>
+                                <p class="text-xs text-slate-500">Level</p>
+                                <span class="mt-1 inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">
+                                    {{ ucfirst($userSkill->level) }}
+                                </span>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500">Bukti</p>
+                                @if ($userSkill->bukti)
+                                    <a href="{{ Storage::url($userSkill->bukti) }}" target="_blank" class="mt-1 inline-block text-xs text-indigo-600 hover:text-indigo-700">Lihat Bukti →</a>
+                                @else
+                                    <span class="mt-1 inline-block text-xs text-slate-400">Tidak ada</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        @if ($userSkill->poin > 0)
+                            <div class="mt-3">
+                                <span class="inline-flex items-center gap-1 text-sm font-medium text-violet-700">★ {{ $userSkill->poin }} Poin</span>
+                            </div>
+                        @endif
+
+                        @if ($userSkill->status === 'rejected' && $userSkill->catatan_admin)
+                            <p class="mt-2 text-xs text-rose-500">{{ $userSkill->catatan_admin }}</p>
+                        @endif
+
+                        @if ($userSkill->status !== 'approved')
+                            <form method="POST" action="{{ route('mahasiswa.skills.destroy', $userSkill) }}" onsubmit="return confirm('Hapus skill ini?')" class="mt-3">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-xs text-rose-600 hover:text-rose-700 font-medium">Hapus Skill</button>
+                            </form>
+                        @endif
+                    </div>
+                @endforeach
             </div>
         @else
             <div class="rounded-xl border border-slate-200 bg-white p-12 text-center shadow-sm">

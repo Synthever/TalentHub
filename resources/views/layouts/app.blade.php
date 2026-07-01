@@ -37,7 +37,13 @@
                 </button>
                 <span class="text-lg font-bold text-slate-900">TalentHub</span>
             </div>
-            <div class="text-sm text-slate-600">{{ Auth::user()->name }}</div>
+            @if(Auth::user()->profile && Auth::user()->profile->foto)
+                <img src="{{ Storage::url(Auth::user()->profile->foto) }}" alt="{{ Auth::user()->name }}" class="h-8 w-8 rounded-full object-cover">
+            @else
+                <div class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 text-xs font-medium text-indigo-700">
+                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                </div>
+            @endif
         </header>
 
         {{-- Mobile sidebar overlay --}}
@@ -73,9 +79,13 @@
                 <h1 class="text-lg font-semibold text-slate-900">@yield('page-title')</h1>
                 <div class="flex items-center gap-4">
                     <span class="text-sm text-slate-600">{{ Auth::user()->name }}</span>
-                    <div class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 text-xs font-medium text-indigo-700">
-                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                    </div>
+                    @if(Auth::user()->profile && Auth::user()->profile->foto)
+                        <img src="{{ Storage::url(Auth::user()->profile->foto) }}" alt="{{ Auth::user()->name }}" class="h-8 w-8 rounded-full object-cover">
+                    @else
+                        <div class="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 text-xs font-medium text-indigo-700">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                        </div>
+                    @endif
                 </div>
             </header>
 
@@ -120,5 +130,6 @@
         close?.addEventListener('click', closeSidebar);
         overlay?.addEventListener('click', closeSidebar);
     </script>
+    @stack('scripts')
 </body>
 </html>

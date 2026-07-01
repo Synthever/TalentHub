@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Mahasiswa\LeaderboardController;
@@ -37,6 +38,10 @@ Route::middleware('auth')->group(function () {
     // Admin routes
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+        // Students
+        Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+        Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
     });
 
     // Mahasiswa routes

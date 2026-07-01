@@ -25,7 +25,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="flex-1 sm:pb-1">
+                <div class="flex-1 sm:pb-1 mt-3">
                     <h2 class="text-xl font-bold text-slate-900">{{ $user->name }}</h2>
                     <p class="text-sm text-slate-500">
                         {{ $profile->jurusan ?? 'Jurusan belum diisi' }}

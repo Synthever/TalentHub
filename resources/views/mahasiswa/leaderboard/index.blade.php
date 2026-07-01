@@ -27,10 +27,8 @@
                 </span>
             </div>
         </div>
-    </div>
-
-    {{-- Leaderboard Table --}}
-    <div class="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+    </div>    {{-- Desktop Table (hidden on mobile) --}}
+    <div class="hidden md:block overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
         <table class="min-w-full divide-y divide-slate-200">
             <thead class="bg-slate-50">
                 <tr>
@@ -90,5 +88,58 @@
                 @endif
             </tbody>
         </table>
+    </div>
+
+    {{-- Mobile Cards (hidden on desktop) --}}
+    <div class="mt-6 space-y-3 md:hidden">
+        @forelse ($mahasiswas as $index => $mhs)
+            @php $rank = $index + 1; @endphp
+            <div class="rounded-xl border border-slate-200 bg-white p-4 shadow-sm {{ $mhs->id === $currentUserId ? 'border-indigo-300 bg-indigo-50/30' : '' }}">
+                <div class="flex items-center gap-3">
+                    {{-- Rank --}}
+                    <div class="shrink-0">
+                        @if ($rank === 1)
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-lg font-bold text-amber-700">🥇</span>
+                        @elseif ($rank === 2)
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-200 text-lg font-bold text-slate-600">🥈</span>
+                        @elseif ($rank === 3)
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-orange-100 text-lg font-bold text-orange-700">🥉</span>
+                        @else
+                            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-base font-bold text-slate-600">{{ $rank }}</span>
+                        @endif
+                    </div>
+
+                    {{-- Avatar --}}
+                    @if ($mhs->profile && $mhs->profile->foto)
+                        <img src="{{ Storage::url($mhs->profile->foto) }}" alt="{{ $mhs->name }}" class="h-10 w-10 rounded-full object-cover">
+                    @else
+                        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-sm font-medium text-indigo-600">
+                            {{ strtoupper(substr($mhs->name, 0, 1)) }}
+                        </div>
+                    @endif
+
+                    {{-- Info --}}
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-semibold text-slate-900 truncate {{ $mhs->id === $currentUserId ? 'text-indigo-700' : '' }}">
+                            {{ $mhs->name }}
+                            @if ($mhs->id === $currentUserId)
+                                <span class="text-xs text-indigo-600">(Kamu)</span>
+                            @endif
+                        </p>
+                        <p class="text-xs text-slate-500 truncate">{{ $mhs->profile->jurusan ?? '-' }}</p>
+                    </div>
+
+                    {{-- Poin --}}
+                    <div class="shrink-0">
+                        <span class="text-base font-bold text-slate-900">{{ number_format($mhs->total_poin ?? 0) }}</span>
+                        <p class="text-xs text-slate-400">poin</p>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="rounded-xl border border-slate-200 bg-white p-12 text-center">
+                <p class="text-sm text-slate-400">Belum ada data leaderboard.</p>
+            </div>
+        @endforelse
     </div>
 @endsection
