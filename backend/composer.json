@@ -1,0 +1,7 @@
+{
+    "name": "talenthub/backend",
+    "require": {
+        "leaflight/leaf": "^3.0",
+        "google/cloud-ai-platform": "^0.1"
+    }
+}
