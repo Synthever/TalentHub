@@ -57,10 +57,10 @@
                                 <td class="px-6 py-4">
                                     <div>
                                         <p class="text-sm font-medium text-slate-900">{{ $cert->nama }}</p>
-                                        <p class="text-xs text-slate-400">{{ $cert->tanggal_terbit->format('d M Y') }}</p>
+                                        <p class="text-xs text-slate-400">{{ optional($cert->tanggal_terbit)->format('d M Y') ?? '-' }}</p>
                                     </div>
                                 </td>
-                                <td class="whitespace-nowrap px-6 py-4 text-sm text-slate-600">{{ $cert->penerbit }}</td>
+                                <td class="whitespace-nowrap px-6 py-4 text-sm text-slate-600">{{ $cert->penerbit ?? '-' }}</td>
                                 <td class="whitespace-nowrap px-6 py-4">
                                     @if ($cert->file_bukti)
                                         <a href="{{ Storage::url($cert->file_bukti) }}" target="_blank" class="text-sm text-indigo-600 hover:text-indigo-700">Lihat</a>
@@ -110,8 +110,8 @@
                         <div class="flex items-start justify-between gap-3">
                             <div class="flex-1">
                                 <p class="text-sm font-semibold text-slate-900">{{ $cert->nama }}</p>
-                                <p class="text-xs text-slate-400">{{ $cert->penerbit }}</p>
-                                <p class="mt-1 text-xs text-slate-500">{{ $cert->tanggal_terbit->format('d M Y') }}</p>
+                                <p class="text-xs text-slate-400">{{ $cert->penerbit ?? '-' }}</p>
+                                <p class="mt-1 text-xs text-slate-500">{{ optional($cert->tanggal_terbit)->format('d M Y') ?? '-' }}</p>
                             </div>
                             <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
                                 @if ($cert->status === 'approved') bg-emerald-50 text-emerald-700

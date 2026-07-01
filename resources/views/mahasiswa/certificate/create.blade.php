@@ -27,44 +27,59 @@
 
                 {{-- Penerbit --}}
                 <div>
-                    <label for="penerbit" class="block text-sm font-medium text-slate-700">Penerbit</label>
-                    <input id="penerbit" type="text" name="penerbit" value="{{ old('penerbit') }}" required class="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('penerbit') border-rose-300 @enderror" placeholder="Contoh: Dicoding, Coursera, Google">
+                    <label for="penerbit" class="block text-sm font-medium text-slate-700">Penerbit <span class="text-slate-400">(opsional)</span></label>
+                    <input id="penerbit" type="text" name="penerbit" value="{{ old('penerbit') }}" class="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('penerbit') border-rose-300 @enderror" placeholder="Contoh: Dicoding, Coursera, Google">
                     @error('penerbit')
+                        <p class="mt-1 text-xs text-rose-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                {{-- Level --}}
+                <div>
+                    <label for="level" class="block text-sm font-medium text-slate-700">Level Sertifikat</label>
+                    <select id="level" name="level" required class="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('level') border-rose-300 @enderror">
+                        <option value="">Pilih level</option>
+                        <option value="lokal" @selected(old('level') === 'lokal')>Lokal</option>
+                        <option value="regional" @selected(old('level') === 'regional')>Regional</option>
+                        <option value="nasional" @selected(old('level') === 'nasional')>Nasional</option>
+                        <option value="internasional" @selected(old('level') === 'internasional')>Internasional</option>
+                    </select>
+                    @error('level')
                         <p class="mt-1 text-xs text-rose-600">{{ $message }}</p>
                     @enderror
                 </div>
 
                 {{-- Tanggal Terbit --}}
                 <div>
-                    <label for="tanggal_terbit" class="block text-sm font-medium text-slate-700">Tanggal Terbit</label>
-                    <input id="tanggal_terbit" type="date" name="tanggal_terbit" value="{{ old('tanggal_terbit') }}" required class="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('tanggal_terbit') border-rose-300 @enderror">
+                    <label for="tanggal_terbit" class="block text-sm font-medium text-slate-700">Tanggal Terbit <span class="text-slate-400">(opsional)</span></label>
+                    <input id="tanggal_terbit" type="date" name="tanggal_terbit" value="{{ old('tanggal_terbit') }}" class="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('tanggal_terbit') border-rose-300 @enderror">
                     @error('tanggal_terbit')
                         <p class="mt-1 text-xs text-rose-600">{{ $message }}</p>
                     @enderror
                 </div>
 
-                {{-- Nomor Sertifikat --}}
+                {{-- URL Bukti --}}
                 <div>
-                    <label for="nomor_sertifikat" class="block text-sm font-medium text-slate-700">Nomor Sertifikat <span class="text-slate-400">(opsional)</span></label>
-                    <input id="nomor_sertifikat" type="text" name="nomor_sertifikat" value="{{ old('nomor_sertifikat') }}" class="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('nomor_sertifikat') border-rose-300 @enderror" placeholder="Contoh: ABC123456">
-                    @error('nomor_sertifikat')
+                    <label for="url_bukti" class="block text-sm font-medium text-slate-700">URL Bukti <span class="text-slate-400">(opsional)</span></label>
+                    <input id="url_bukti" type="url" name="url_bukti" value="{{ old('url_bukti') }}" class="mt-1 block w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm transition-colors focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 @error('url_bukti') border-rose-300 @enderror" placeholder="https://...">
+                    @error('url_bukti')
                         <p class="mt-1 text-xs text-rose-600">{{ $message }}</p>
                     @enderror
                 </div>
 
                 {{-- File Sertifikat --}}
                 <div>
-                    <label for="file_sertifikat" class="block text-sm font-medium text-slate-700">File Sertifikat</label>
+                    <label for="file_bukti" class="block text-sm font-medium text-slate-700">File Sertifikat</label>
                     <div class="mt-1 flex items-center justify-center rounded-lg border-2 border-dashed border-slate-300 px-6 py-8 transition-colors hover:border-indigo-400">
                         <div class="text-center">
                             <svg class="mx-auto h-10 w-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
                             <div class="mt-2">
-                                <input id="file_sertifikat" type="file" name="file_sertifikat" accept=".jpg,.jpeg,.png,.pdf,.webp" required class="block w-full text-sm text-slate-500 file:mr-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-medium file:text-indigo-700 hover:file:bg-indigo-100">
+                                <input id="file_bukti" type="file" name="file_bukti" accept=".jpg,.jpeg,.png,.pdf,.webp" required class="block w-full text-sm text-slate-500 file:mr-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-medium file:text-indigo-700 hover:file:bg-indigo-100">
                             </div>
                             <p class="mt-1 text-xs text-slate-400">File sertifikat atau screenshot. JPG, PNG, PDF, WebP. Maks 5MB.</p>
                         </div>
                     </div>
-                    @error('file_sertifikat')
+                    @error('file_bukti')
                         <p class="mt-1 text-xs text-rose-600">{{ $message }}</p>
                     @enderror
                 </div>
