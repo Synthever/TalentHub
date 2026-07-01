@@ -1,18 +1,20 @@
 <?php
 require 'vendor/autoload.php';
 
-use Google\Cloud\AiPlatform\V1\Client\PredictionServiceClient;
-use Google\Cloud\AiPlatform\V1\PredictRequest;
+// Coba gunakan namespace yang benar berdasarkan composer show
+// Autoload psr-4: Google\Cloud\AIPlatform\ => src
+// Berarti class-nya harusnya dimulai dengan Google\Cloud\AIPlatform\
 
-// Konfigurasi Project
-$projectId = 'your-gcp-project-id';
-$location = 'us-central1';
-$modelId = 'gemini-1.5-flash';
+use Google\Cloud\AIPlatform\V1\PredictionServiceClient;
 
-// Inisialisasi Client
-$client = new PredictionServiceClient([
-    'apiEndpoint' => "{$location}-aiplatform.googleapis.com",
-]);
+echo "Mencoba menginisialisasi PredictionServiceClient...\n";
 
-echo "Koneksi Vertex AI siap. (Ingat ganti project ID dan set GOOGLE_APPLICATION_CREDENTIALS)\n";
+try {
+    $client = new PredictionServiceClient([
+        'apiEndpoint' => 'us-central1-aiplatform.googleapis.com',
+    ]);
+    echo "Berhasil inisialisasi client!\n";
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage() . "\n";
+}
 ?>
