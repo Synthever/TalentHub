@@ -3,8 +3,10 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Mahasiswa\LeaderboardController;
 use App\Http\Controllers\Mahasiswa\PortfolioController;
 use App\Http\Controllers\Mahasiswa\ProfileController;
+use App\Http\Controllers\Mahasiswa\RewardController;
 use App\Http\Controllers\Mahasiswa\SkillController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,5 +60,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/portfolios', [PortfolioController::class, 'store'])->name('portfolios.store');
         Route::get('/portfolios/{portfolio}', [PortfolioController::class, 'show'])->name('portfolios.show');
         Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolios.destroy');
+
+        // Leaderboard
+        Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard');
+
+        // Rewards
+        Route::get('/rewards', [RewardController::class, 'index'])->name('rewards.index');
+        Route::post('/rewards/{reward}/claim', [RewardController::class, 'claim'])->name('rewards.claim');
     });
 });
