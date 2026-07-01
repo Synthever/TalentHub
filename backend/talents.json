@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Budi Santoso",
+    "skills": ["Flutter", "Dart", "PHP", "Laravel"],
+    "experience_years": 2,
+    "bio": "Mobile developer with experience in Flutter and PHP backend."
+  },
+  {
+    "id": 2,
+    "name": "Siti Aminah",
+    "skills": ["Python", "TensorFlow", "Gemini API"],
+    "experience_years": 3,
+    "bio": "AI Engineer passionate about LLMs and Vertex AI."
+  }
+]
