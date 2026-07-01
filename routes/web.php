@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Mahasiswa\PortfolioController;
 use App\Http\Controllers\Mahasiswa\ProfileController;
 use App\Http\Controllers\Mahasiswa\SkillController;
 use Illuminate\Support\Facades\Route;
@@ -50,5 +51,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/skills/tambah', [SkillController::class, 'create'])->name('skills.create');
         Route::post('/skills', [SkillController::class, 'store'])->name('skills.store');
         Route::delete('/skills/{skill}', [SkillController::class, 'destroy'])->name('skills.destroy');
+
+        // Portfolios
+        Route::get('/portfolios', [PortfolioController::class, 'index'])->name('portfolios.index');
+        Route::get('/portfolios/tambah', [PortfolioController::class, 'create'])->name('portfolios.create');
+        Route::post('/portfolios', [PortfolioController::class, 'store'])->name('portfolios.store');
+        Route::get('/portfolios/{portfolio}', [PortfolioController::class, 'show'])->name('portfolios.show');
+        Route::delete('/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('portfolios.destroy');
     });
 });
