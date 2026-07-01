@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Mahasiswa\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Landing redirect
@@ -37,5 +38,10 @@ Route::middleware('auth')->group(function () {
     // Mahasiswa routes
     Route::middleware('role:mahasiswa')->prefix('mahasiswa')->name('mahasiswa.')->group(function () {
         Route::get('/dashboard', [App\Http\Controllers\Mahasiswa\DashboardController::class, 'index'])->name('dashboard');
+
+        // Profile
+        Route::get('/profil', [ProfileController::class, 'show'])->name('profile.show');
+        Route::get('/profil/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profil', [ProfileController::class, 'update'])->name('profile.update');
     });
 });

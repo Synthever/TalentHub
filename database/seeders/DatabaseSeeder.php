@@ -22,7 +22,13 @@ class DatabaseSeeder extends Seeder
         // Admin user
         $admin = User::factory()->admin()->create([
             'name' => 'Admin TalentHub',
-            'email' => 'admin@talenthub.test',
+            'email' => 'admin@talenthub.com',
+        ]);
+
+        // Mahasiswa user
+        $mahasiswa = User::factory()->mahasiswa()->create([
+            'name' => 'Mahasiswa TalentHub',
+            'email' => 'mahasiswa@talenthub.com',
         ]);
 
         // Skills master data
