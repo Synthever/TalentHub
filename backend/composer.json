@@ -1,7 +1,0 @@
-{
-    "name": "talenthub/backend",
-    "require": {
-        "leafs/leaf": "^3.0",
-        "google/cloud-ai-platform": "^0.1"
-    }
-}
