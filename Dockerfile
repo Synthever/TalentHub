@@ -10,6 +10,7 @@ RUN apk add --no-cache \
     curl \
     libpng-dev \
     libzip-dev \
+    icu-dev \
     zip \
     unzip \
     oniguruma-dev \
@@ -31,9 +32,9 @@ RUN docker-php-ext-install \
     pcntl \
     bcmath \
     gd \
+    intl \
     && pecl install redis \
-    && docker-php-ext-enable redis \
-    && apk del .build-deps
+    && docker-php-ext-enable redis
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
