@@ -59,7 +59,7 @@ class PortfolioController extends Controller
 
     public function show(Portfolio $portfolio): View
     {
-        if ($portfolio->user_id !== Auth::id()) {
+        if ($portfolio->user_id != Auth::id()) {
             abort(403);
         }
 
@@ -70,7 +70,7 @@ class PortfolioController extends Controller
 
     public function destroy(Portfolio $portfolio): RedirectResponse
     {
-        if ($portfolio->user_id !== Auth::id()) {
+        if ($portfolio->user_id != Auth::id()) {
             abort(403);
         }
 

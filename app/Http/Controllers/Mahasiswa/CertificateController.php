@@ -59,7 +59,7 @@ class CertificateController extends Controller
 
     public function destroy(Certificate $certificate): RedirectResponse
     {
-        if ($certificate->user_id !== Auth::id()) {
+        if ($certificate->user_id != Auth::id()) {
             abort(403);
         }
 

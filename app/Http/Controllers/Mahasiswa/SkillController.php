@@ -70,7 +70,7 @@ class SkillController extends Controller
 
     public function destroy(UserSkill $skill): RedirectResponse
     {
-        if ($skill->user_id !== Auth::id()) {
+        if ($skill->user_id != Auth::id()) {
             abort(403);
         }
 

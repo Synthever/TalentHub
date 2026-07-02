@@ -20,7 +20,7 @@ class LeaderboardController extends Controller
 
         $currentUser = Auth::user();
         $currentRank = $mahasiswas->search(fn (User $u) => $u->id === $currentUser->id);
-        $currentRank = $currentRank !== false ? $currentRank + 1 : null;
+        $currentRank = $currentRank != false ? $currentRank + 1 : null;
 
         return view('mahasiswa.leaderboard.index', [
             'mahasiswas' => $mahasiswas,
